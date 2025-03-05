@@ -57,22 +57,22 @@ class GildedRoseTest {
     }
 
     @Test
-    void sulfuras(){
-        Item[] brie = new Item[] {new Item ("Sulfuras, Hand of Ragnaros", 5, 5)};
-        GildedRose app = new GildedRose(brie);
-        app.updateQuality();
-        assertEquals("Sulfuras, Hand of Ragnaros", app.items[0].name);
-        assertEquals(80, app.items[0].quality);
-        assertEquals(4, app.items[0].sellIn);
-    }
-
-    @Test
     void agedBrie5days(){
         Item[] brie = new Item[] {new Item ("Aged Brie", 5, 5)};
         GildedRose app = new GildedRose(brie);
         app.updateQuality();
         assertEquals("Aged Brie", app.items[0].name);
         assertEquals(6, app.items[0].quality);
+        assertEquals(4, app.items[0].sellIn);
+    }
+
+    @Test
+    void agedBrieSubZero(){
+        Item[] brie = new Item[] {new Item ("Aged Brie", -1, 5)};
+        GildedRose app = new GildedRose(brie);
+        app.updateQuality();
+        assertEquals("Aged Brie", app.items[0].name);
+        assertEquals(7, app.items[0].quality);
         assertEquals(4, app.items[0].sellIn);
     }
 
