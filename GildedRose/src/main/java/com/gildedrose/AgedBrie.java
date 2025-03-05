@@ -2,16 +2,14 @@ package com.gildedrose;
 
 public class AgedBrie extends Item{
 
-    public AgedBrie(String name, int sellIn, int quality) {
-        super(name, sellIn, quality);
+    public AgedBrie(int sellIn, int quality) {
+        super("Aged Brie", sellIn, quality);
     }
 
-    public int updateQuality(int value){
-        int res = (value * (-1));
-        if (res < 51 && res >= 0){
-            return res;
-        } else{
-            return value;
+    public void updateQuality(){
+        this.sellIn -= 1;
+        if (this.quality < 50){
+            this.quality += 1;
         }
     }
 }

@@ -2,16 +2,12 @@ package com.gildedrose;
 
 public class Conjured extends Item{
 
-    public Conjured(String name, int sellIn, int quality) {
-        super(name, sellIn, quality);
+    public Conjured(int sellIn, int quality) {
+        super("Conjured", sellIn, quality);
     }
 
-    public int updateQuality(int value){
-        int res = value * 2;
-        if (res >= 0){
-            return res;
-        } else {
-            return 0;
-        }
+    public void updateQuality(){
+        this.sellIn -= 1;
+        this.quality -= 2;
     }
 }
