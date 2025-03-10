@@ -29,21 +29,17 @@ public class Game implements IGame {
    }
 
    public boolean isPlayable() {
-      return (howManyPlayers() >= 2);
+      return (players.size() >= 2);
    }
 
    public boolean add(String playerName) {
-      Player p = new Player(howManyPlayers(), playerName, 0);
+      Player p = new Player(players.size(), playerName, 0);
       players.add(p);
 
       System.out.println(playerName + " was added");
       System.out.println("They are player number " + players.size());
-      
-      return true;
-   }
 
-   public int howManyPlayers() {
-      return players.size();
+      return true;
    }
 
    public void roll(int roll) {
