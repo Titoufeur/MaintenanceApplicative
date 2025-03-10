@@ -5,10 +5,7 @@ import java.util.LinkedList;
 
 // REFACTOR ME
 public class Game implements IGame {
-   ArrayList players = new ArrayList();
-   int[] places = new int[6];
-   int[] purses = new int[6];
-   boolean[] inPenaltyBox = new boolean[6];
+   ArrayList<Player> players = new ArrayList<>();
 
    LinkedList popQuestions = new LinkedList();
    LinkedList scienceQuestions = new LinkedList();
@@ -36,13 +33,12 @@ public class Game implements IGame {
    }
 
    public boolean add(String playerName) {
-      places[howManyPlayers()] = 1;
-      purses[howManyPlayers()] = 0;
-      inPenaltyBox[howManyPlayers()] = false;
-      players.add(playerName);
+      Player p = new Player(howManyPlayers(), playerName, 0);
+      players.add(p);
 
       System.out.println(playerName + " was added");
       System.out.println("They are player number " + players.size());
+      
       return true;
    }
 
