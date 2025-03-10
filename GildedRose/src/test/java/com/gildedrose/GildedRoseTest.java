@@ -47,6 +47,16 @@ class GildedRoseTest {
     }
 
     @Test
+    void backstage10(){
+        Item[] brie = new Item[] {new Item ("Backstage passes to a TAFKAL80ETC concert", 10, 5)};
+        GildedRose app = new GildedRose(brie);
+        app.updateQuality();
+        assertEquals("Backstage passes to a TAFKAL80ETC concert", app.items[0].name);
+        assertEquals(7, app.items[0].quality);
+        assertEquals(9, app.items[0].sellIn);
+    }
+
+    @Test
     void backstageSubZero(){
         Item[] brie = new Item[] {new Item ("Backstage passes to a TAFKAL80ETC concert", -1, 5)};
         GildedRose app = new GildedRose(brie);
@@ -72,8 +82,48 @@ class GildedRoseTest {
         GildedRose app = new GildedRose(brie);
         app.updateQuality();
         assertEquals("Aged Brie", app.items[0].name);
-        assertEquals(7, app.items[0].quality);
+        assertEquals(6, app.items[0].quality);
+        assertEquals(-2, app.items[0].sellIn);
+    }
+
+    @Test
+    void sulfuras(){
+        Item[] brie = new Item[] {new Item ("Sulfuras, Hand of Ragnaros", 5, 80)};
+        GildedRose app = new GildedRose(brie);
+        app.updateQuality();
+        assertEquals("Sulfuras, Hand of Ragnaros", app.items[0].name);
+        assertEquals(80, app.items[0].quality);
+        assertEquals(5, app.items[0].sellIn);
+    }
+
+    @Test
+    void sulfurasSubZero(){
+        Item[] brie = new Item[] {new Item ("Sulfuras, Hand of Ragnaros", -2, 80)};
+        GildedRose app = new GildedRose(brie);
+        app.updateQuality();
+        assertEquals("Sulfuras, Hand of Ragnaros", app.items[0].name);
+        assertEquals(80, app.items[0].quality);
+        assertEquals(-2, app.items[0].sellIn);
+    }
+
+    @Test
+    void conjured(){
+        Item[] brie = new Item[] {new Item ("Conjured Mana Cake", 5, 5)};
+        GildedRose app = new GildedRose(brie);
+        app.updateQuality();
+        assertEquals("Conjured Mana Cake", app.items[0].name);
+        assertEquals(3, app.items[0].quality);
         assertEquals(4, app.items[0].sellIn);
+    }
+
+    @Test
+    void conjuredSubZero(){
+        Item[] brie = new Item[] {new Item ("Conjured Mana Cake", -1, 6)};
+        GildedRose app = new GildedRose(brie);
+        app.updateQuality();
+        assertEquals("Conjured Mana Cake", app.items[0].name);
+        assertEquals(2, app.items[0].quality);
+        assertEquals(-2, app.items[0].sellIn);
     }
 
 }
