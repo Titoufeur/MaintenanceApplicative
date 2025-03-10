@@ -24,6 +24,16 @@ public class Player {
         return inPenaltyBox;
     }
 
+    public void setInPenaltyBox(boolean inPenaltyBox) {
+        if (inPenaltyBox){
+            this.inPenaltyBox = true;
+            System.out.println(this.name + " was sent to the penalty box");
+        } else{
+            this.inPenaltyBox = false;
+            System.out.println(this.name + " is getting out of the penalty box");
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -40,10 +50,19 @@ public class Player {
         return purses;
     }
 
+    public void addPurses(){
+        this.purses++;
+        System.out.println(this.name
+                + " now has "
+                + this.purses
+                + " Gold Coins.");
+    }
+
     public void updatePlace(int roll){
         this.place += roll;
         if (this.place > 12){
             this.place -= 12;
         }
     }
+
 }

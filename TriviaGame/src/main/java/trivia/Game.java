@@ -53,8 +53,7 @@ public class Game implements IGame {
       if (getCurrentPlayer(currentPlayer).isInPenaltyBox()) {
          if (roll % 2 != 0) {
             isGettingOutOfPenaltyBox = true;
-
-            System.out.println(getCurrentPlayer(currentPlayer) + " is getting out of the penalty box");
+            getCurrentPlayer(currentPlayer).setInPenaltyBox(false); //Fait sortir de prison, en l'annonçant en console
             getCurrentPlayer(currentPlayer).updatePlace(roll); //Ajoute la valeur de roll à la place du joueur
             printStatement(getCurrentPlayer(currentPlayer));  //Donne la place du joueur et la catégorie de la question
             askQuestion();
@@ -99,15 +98,10 @@ public class Game implements IGame {
    }
 
    public boolean handleCorrectAnswer() {
-      if (inPenaltyBox[currentPlayer]) {
+      if (getCurrentPlayer(currentPlayer).isInPenaltyBox()) {
          if (isGettingOutOfPenaltyBox) {
-            System.out.println("Answer was corrent!!!!");
-            purses[currentPlayer]++;
-            System.out.println(players.get(currentPlayer)
-                               + " now has "
-                               + purses[currentPlayer]
-                               + " Gold Coins.");
-
+            System.out.println("Answer was correct!!!!");
+            getCurrentPlayer(currentPlayer).addPurses();
             boolean winner = didPlayerWin();
             currentPlayer++;
             if (currentPlayer == players.size()) currentPlayer = 0;
@@ -119,16 +113,10 @@ public class Game implements IGame {
             return true;
          }
 
-
       } else {
 
-         System.out.println("Answer was corrent!!!!");
-         purses[currentPlayer]++;
-         System.out.println(players.get(currentPlayer)
-                            + " now has "
-                            + purses[currentPlayer]
-                            + " Gold Coins.");
-
+         System.out.println("Answer was correct!!!!");
+         getCurrentPlayer(currentPlayer).addPurses();
          boolean winner = didPlayerWin();
          currentPlayer++;
          if (currentPlayer == players.size()) currentPlayer = 0;
@@ -139,8 +127,7 @@ public class Game implements IGame {
 
    public boolean wrongAnswer() {
       System.out.println("Question was incorrectly answered");
-      System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
-      inPenaltyBox[currentPlayer] = true;
+      getCurrentPlayer(currentPlayer).setInPenaltyBox(true);
 
       currentPlayer++;
       if (currentPlayer == players.size()) currentPlayer = 0;
@@ -149,6 +136,6 @@ public class Game implements IGame {
 
 
    private boolean didPlayerWin() {
-      return !(purses[currentPlayer] == 6);
+      return !(getCurrentPlayer(currentPlayer).getPurses() == 6);
    }
 }
