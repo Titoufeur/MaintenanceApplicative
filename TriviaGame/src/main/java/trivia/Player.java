@@ -15,4 +15,35 @@ public class Player {
         this.purses = 0;
         this.inPenaltyBox = false;
     }
+
+    public String toString(){
+        return this.name;
+    }
+
+    public boolean isInPenaltyBox() {
+        return inPenaltyBox;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPlace() {
+        return place;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPurses() {
+        return purses;
+    }
+
+    public void updatePlace(int roll){
+        this.place += roll;
+        if (this.place > 12){
+            this.place -= 12;
+        }
+    }
 }

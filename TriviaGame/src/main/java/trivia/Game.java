@@ -42,40 +42,38 @@ public class Game implements IGame {
       return true;
    }
 
+   public Player getCurrentPlayer(int nb) {
+      return players.get(nb);
+   }
+
    public void roll(int roll) {
-      System.out.println(players.get(currentPlayer) + " is the current player");
+      System.out.println(getCurrentPlayer(currentPlayer) + " is the current player");
       System.out.println("They have rolled a " + roll);
 
-      if (inPenaltyBox[currentPlayer]) {
+      if (getCurrentPlayer(currentPlayer).isInPenaltyBox()) {
          if (roll % 2 != 0) {
             isGettingOutOfPenaltyBox = true;
 
-            System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-            places[currentPlayer] = places[currentPlayer] + roll;
-            if (places[currentPlayer] > 12) places[currentPlayer] = places[currentPlayer] - 12;
-
-            System.out.println(players.get(currentPlayer)
-                               + "'s new location is "
-                               + places[currentPlayer]);
-            System.out.println("The category is " + currentCategory());
+            System.out.println(getCurrentPlayer(currentPlayer) + " is getting out of the penalty box");
+            getCurrentPlayer(currentPlayer).updatePlace(roll); //Ajoute la valeur de roll à la place du joueur
+            printStatement(getCurrentPlayer(currentPlayer));  //Donne la place du joueur et la catégorie de la question
             askQuestion();
          } else {
             System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
          }
-
       } else {
-
-         places[currentPlayer] = places[currentPlayer] + roll;
-         if (places[currentPlayer] > 12) places[currentPlayer] = places[currentPlayer] - 12;
-
-         System.out.println(players.get(currentPlayer)
-                            + "'s new location is "
-                            + places[currentPlayer]);
-         System.out.println("The category is " + currentCategory());
+         getCurrentPlayer(currentPlayer).updatePlace(roll);
+         printStatement(getCurrentPlayer(currentPlayer));
          askQuestion();
       }
+   }
 
+   public void printStatement(Player p){
+      System.out.println(p
+              + "'s new location is "
+              + p.getPlace());
+      System.out.println("The category is " + currentCategory());
    }
 
    private void askQuestion() {
@@ -91,16 +89,13 @@ public class Game implements IGame {
 
 
    private String currentCategory() {
-      if (places[currentPlayer] - 1 == 0) return "Pop";
-      if (places[currentPlayer] - 1 == 4) return "Pop";
-      if (places[currentPlayer] - 1 == 8) return "Pop";
-      if (places[currentPlayer] - 1 == 1) return "Science";
-      if (places[currentPlayer] - 1 == 5) return "Science";
-      if (places[currentPlayer] - 1 == 9) return "Science";
-      if (places[currentPlayer] - 1 == 2) return "Sports";
-      if (places[currentPlayer] - 1 == 6) return "Sports";
-      if (places[currentPlayer] - 1 == 10) return "Sports";
-      return "Rock";
+      int pos = getCurrentPlayer(currentPlayer).getPlace() - 1;
+      switch (pos % 4) {
+         case 0: return "Pop";
+         case 1: return "Science";
+         case 2: return "Sports";
+         default: return "Rock";
+      }
    }
 
    public boolean handleCorrectAnswer() {
