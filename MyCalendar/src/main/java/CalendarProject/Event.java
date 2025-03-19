@@ -13,7 +13,7 @@ public class Event {
     public Event(String type, String title, String proprietaire, LocalDateTime dateDebut, int dureeMinutes,
                  String lieu, String participants, int frequenceJours) {
         switch (type){
-            case "REUNION":
+            case "REUNION": //
                 this.type = new Reunion(lieu);
                 break;
         }
