@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Reunion extends EventType {
 
     private ArrayList<String> participants;
-    private EventPlace lieu;
+    private EventPlace place;
 
     public Reunion(String place) {
         this.participants = new ArrayList<>();
-        this.lieu = new EventPlace(place);
+        this.place = new EventPlace(place);
     }
 
     public void addParticipant(String participant){
@@ -17,8 +17,8 @@ public class Reunion extends EventType {
             this.participants.add(participant);
         }
     }
-/*
-    public getDesc(EventTitle title){
-        return "Réunion : " + title + "à " + place.getPlace() + " avec " + this.participants;
-    }*/
+
+    public String getDesc(EventTitle title){
+        return "Réunion : " + title + "à " + this.place.getPlace() + " avec " + this.participants;
+    }
 }
