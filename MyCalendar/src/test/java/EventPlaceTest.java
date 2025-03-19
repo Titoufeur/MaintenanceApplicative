@@ -1,13 +1,14 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import CalendarProject.EventTitle;
+import CalendarProject.EventPlace;
 
 public class EventPlaceTest {
 
     @Test
     public void testValidPlace(){
         EventPlace place = new EventPlace("Paris");
-        assertEquals("Paris1", place.getPlace());
+        assertEquals("Paris", place.getPlace());
     }
 
     @Test
