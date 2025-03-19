@@ -2,8 +2,8 @@ package CalendarProject;
 
 import java.time.LocalDateTime;
 
-public final class StartDate {
-    private final LocalDateTime value;
+public class StartDate {
+    private LocalDateTime value;
 
     public StartDate(LocalDateTime value) {
         if (value == null) {
