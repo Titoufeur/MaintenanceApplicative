@@ -15,7 +15,7 @@ class EventTitleTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new EventTitle("");
         });
-        assertEquals("Le titre ne doit pas être vide", exception.getMessage());
+        assertEquals("Le titre ne peut pas être vide", exception.getMessage());
     }
 
     @Test
@@ -23,6 +23,6 @@ class EventTitleTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new EventTitle(null);
         });
-        assertEquals("Le titre ne doit pas être null", exception.getMessage());
+        assertEquals("Le titre ne peut pas être null", exception.getMessage());
     }
 }
