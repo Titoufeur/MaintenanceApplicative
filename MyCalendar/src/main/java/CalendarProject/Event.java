@@ -3,7 +3,7 @@ package CalendarProject;
 import java.time.LocalDateTime;
 
 public class Event {
-    public String type; // "RDV_PERSONNEL", "REUNION", "PERIODIQUE"
+    public String type; // "RDV_PERSONNEL", "REUNION", "PERIODIQUE" apres refactor : public EventType type
     public String title;
     public String proprietaire;
     public LocalDateTime dateDebut;
@@ -14,7 +14,7 @@ public class Event {
 
     public Event(String type, String title, String proprietaire, LocalDateTime dateDebut, int dureeMinutes,
                  String lieu, String participants, int frequenceJours) {
-        this.type = type;
+        this.type = type; // this.type = switch type, case reunion = new Reunion(......)
         this.title = title;
         this.proprietaire = proprietaire;
         this.dateDebut = dateDebut;
@@ -33,6 +33,6 @@ public class Event {
         } else if (type.equals("PERIODIQUE")) {
             desc = "Événement périodique : " + title + " tous les " + frequenceJours + " jours";
         }
-        return desc;
+        return desc; //return this.type.getDesc(this.place) et supprimer tout le reste
     }
 }

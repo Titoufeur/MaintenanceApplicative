@@ -7,7 +7,7 @@ public class EventType {
     @Test
     public void testValidType(){
         EventType ev = new EventType("REUNION");
-        assertEquals("REUNION", ev.getValue());
+        assertEquals("REUNION", ev.getType());
     }
 
     @Test
