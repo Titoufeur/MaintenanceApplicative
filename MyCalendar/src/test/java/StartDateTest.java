@@ -1,24 +1,42 @@
-import CalendarProject.StartDate;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDateTime;
+import CalendarProject.StartDate;
 
 public class StartDateTest {
 
     @Test
-    public void testValidStartDate() {
+    public void testValidStartDateAndDuration() {
         LocalDateTime dateTime = LocalDateTime.of(2025, 3, 19, 12, 0);
-        StartDate startDate = new StartDate(dateTime);
-        // Vérifie que la valeur stockée est bien celle passée en paramètre.
-        assertEquals(dateTime, startDate.getValue(), "La valeur de startDate doit correspondre à la date fournie");
+        int dureeMinutes = 90; // Exemple de durée positive
+        StartDate startDate = new StartDate(dateTime, dureeMinutes);
+        assertEquals(dateTime, startDate.getStartDate(), "La date doit correspondre à celle fournie");
+        assertEquals(dureeMinutes, startDate.getDureeMinutes(), "La durée doit correspondre");
     }
 
     @Test
     public void testNullStartDateShouldThrowException() {
-        // Vérifie que le constructeur lève une exception si la date est null.
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new StartDate(null);
+            new StartDate(null, 90);
         });
         assertEquals("La date de début ne peut pas être null", exception.getMessage());
+    }
+
+    @Test
+    public void testNegativeDurationShouldThrowException() {
+        LocalDateTime dateTime = LocalDateTime.of(2025, 3, 19, 12, 0);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new StartDate(dateTime, -10);
+        });
+        assertEquals("La durée doit être positive", exception.getMessage());
+    }
+
+    @Test
+    public void testZeroDurationShouldThrowException() {
+        LocalDateTime dateTime = LocalDateTime.of(2025, 3, 19, 12, 0);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new StartDate(dateTime, 0);
+        });
+        assertEquals("La durée doit être positive", exception.getMessage());
     }
 }
