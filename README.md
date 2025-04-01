@@ -1,3 +1,5 @@
+Projet de Titouan LÉTONDAL
+
 # BUT 3A : Maintenance Applicative
 
 Dans ce cours, vous apprendrez à détecter les code smells et à effectuer un refactoring approprié en utilisant de bons design patterns.
