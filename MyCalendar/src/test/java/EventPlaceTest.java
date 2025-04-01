@@ -8,7 +8,7 @@ public class EventPlaceTest {
     @Test
     public void testValidPlace(){
         EventPlace place = new EventPlace("Paris");
-        assertEquals("Paris", place.getPlace());
+        assertEquals("Paris", place.getValue());
     }
 
     @Test
