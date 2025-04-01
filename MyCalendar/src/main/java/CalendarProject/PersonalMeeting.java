@@ -1,26 +1,14 @@
 package CalendarProject;
 
-public final class Reunion extends Event implements NonPeriodicEvent {
-    private final EventPlace eventPlace;
-    private final Participants participants;
+public final class PersonalMeeting extends Event implements NonPeriodicEvent {
 
-    public Reunion(EventId id, EventTitle titre, EventDate date, EventDuration duree, EventPlace eventPlace, Participants participants) {
+    public PersonalMeeting(EventId id, EventTitle titre, EventDate date, EventDuration duree) {
         super(id, titre, date, duree);
-        this.eventPlace = eventPlace;
-        this.participants = participants;
-    }
-
-    public EventPlace getLieu() {
-        return eventPlace;
-    }
-
-    public Participants getParticipants() {
-        return participants;
     }
 
     @Override
     public String description() {
-        return "Réunion : " + titre.toString() + " à " + eventPlace.toString() + " avec " + participants.toString();
+        return "RDV : " + titre.toString() + " à " + date.toString() + " pendant " + duree.toString();
     }
 
     @Override

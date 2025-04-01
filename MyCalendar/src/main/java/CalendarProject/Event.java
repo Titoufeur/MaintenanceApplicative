@@ -1,43 +1,47 @@
 package CalendarProject;
 
-import java.time.LocalDateTime;
+public abstract class Event {
+    protected final EventId id;
+    protected final EventTitle titre;
+    protected final EventDate date;
+    protected final EventDuration duree;
 
-public class Event {
-    public EventType type; // "RDV_PERSONNEL", "REUNION", "PERIODIQUE" apres refactor : public EventType type
-    public EventTitle title;
-    public String proprietaire;
-    public StartDate startDate;
-    public String participants; // séparés par virgules (pour REUNION uniquement)
-    public int frequenceJours; // uniquement pour PERIODIQUE
-
-    public Event(String type, String title, String proprietaire, LocalDateTime dateDebut, int dureeMinutes,
-                 String lieu, String participants, int frequenceJours) {
-        switch (type){
-            case "REUNION": //
-                this.type = new Reunion(lieu);
-                break;
-        }
-        this.title = new EventTitle(title);
-        this.proprietaire = proprietaire;
-        this.startDate = new StartDate(dateDebut, dureeMinutes);
-        this.participants = participants;
-        this.frequenceJours = frequenceJours;
+    public Event(EventId id, EventTitle titre, EventDate date, EventDuration duree) {
+        this.id = id;
+        this.titre = titre;
+        this.date = date;
+        this.duree = duree;
     }
 
-    public String description() {
-        return this.type.getDesc(this.title.getValue());
+    public EventId getId() {
+        return id;
     }
+
+    public EventTitle getTitre() {
+        return titre;
+    }
+
+    public EventDate getDate() {
+        return date;
+    }
+
+    public EventDuration getDuree() {
+        return duree;
+    }
+
+    // On calcule l'intervalle de temps à partir de la date et de la durée
+    public TimeInterval getTimeInterval() {
+        EventDate end = new EventDate(date.getValue().plusMinutes(duree.getValue()));
+        return new TimeInterval(date, end);
+    }
+
+    public abstract String description();
+
+    // Détection des conflits par double dispatch
+    public abstract boolean conflictsWith(Event other);
+    public abstract boolean conflictsWithNonPeriodique(NonPeriodicEvent e);
+    public abstract boolean conflictsWithPeriodique(PeriodicEvent e);
+
+    // Vérifie si l'événement se produit dans la période donnée
+    public abstract boolean occursInPeriod(TimeInterval period);
 }
-/*
-public String description() {
-         String desc = "";
-         if (type.equals("RDV_PERSONNEL")) {
-             desc = "RDV : " + title + " à " + dateDebut.toString();
-         } else if (type.equals("REUNION")) {
-             desc = "Réunion : " + title + " à " + lieu + " avec " + participants;
-         } else if (type.equals("PERIODIQUE")) {
-             desc = "Événement périodique : " + title + " tous les " + frequenceJours + " jours";
-         }
-         return desc;
-     }
- */

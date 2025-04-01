@@ -1,21 +1,35 @@
 package CalendarProject;
 
-public class EventTitle {
+import java.util.Optional;
 
-    private String title;
+public final class EventTitle {
+    private final String value;
 
-    public EventTitle(String title){
-        if (title == null) {
-            throw new IllegalArgumentException("Le titre ne peut pas être null");
-        }
-        if (title.trim().isEmpty()) {
-            throw new IllegalArgumentException("Le titre ne peut pas être vide");
-        } else{
-            this.title = title;
-        }
+    public EventTitle(String value) {
+        this.value = Optional.ofNullable(value)
+                .filter(v -> !v.trim().isEmpty())
+                .orElseThrow(() -> new IllegalArgumentException("Le titre ne peut pas être null ou vide"));
     }
 
-    public String getValue(){
-        return this.title;
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EventTitle)) return false;
+        EventTitle that = (EventTitle) o;
+        return value.equals(that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }
