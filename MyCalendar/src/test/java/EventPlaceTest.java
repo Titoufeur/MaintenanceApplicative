@@ -24,6 +24,6 @@ public class EventPlaceTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new EventPlace(null);
         });
-        assertEquals("Le lieu ne peut pas être null", exception.getMessage());
+        assertEquals("Le lieu ne peut pas être vide", exception.getMessage());
     }
 }

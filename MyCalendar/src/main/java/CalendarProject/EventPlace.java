@@ -8,7 +8,7 @@ public final class EventPlace {
     public EventPlace(String value) {
         this.value = Optional.ofNullable(value)
                 .filter(v -> !v.trim().isEmpty())
-                .orElseThrow(() -> new IllegalArgumentException("Le lieu ne peut pas être null ou vide"));
+                .orElseThrow(() -> new IllegalArgumentException("Le lieu ne peut pas être vide"));
     }
 
     public String getValue() {

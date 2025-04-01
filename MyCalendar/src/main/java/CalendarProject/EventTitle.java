@@ -8,7 +8,7 @@ public final class EventTitle {
     public EventTitle(String value) {
         this.value = Optional.ofNullable(value)
                 .filter(v -> !v.trim().isEmpty())
-                .orElseThrow(() -> new IllegalArgumentException("Le titre ne peut pas être null ou vide"));
+                .orElseThrow(() -> new IllegalArgumentException("Le titre ne peut pas être null"));
     }
 
     public String getValue() {
